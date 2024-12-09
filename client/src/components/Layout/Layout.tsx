@@ -31,8 +31,8 @@ const Layout: React.FC = () => {
                     <Link to="/about">
                         <dt>קצת עלינו</dt>
                     </Link>
-                    <Link to="/order">
-                        <dt>הזמנות</dt>
+                    <Link to="/shop">
+                        <dt>חנות</dt>
                     </Link>
                     <Link to="/gallery">
                         <dt>גלריה</dt>
