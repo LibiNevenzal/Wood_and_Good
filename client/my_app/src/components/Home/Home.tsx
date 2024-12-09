@@ -1,7 +1,7 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import React from "react";
 import style from "./Home.module.css";
-import woodImage from "./wood.PNG";
+import woodImage from "./wood.png";
 
 
 const Home: React.FC = () => {
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
 
     return (
         <>
-            {/* חלק עליון - סרגל ניווט */}
+            {/* חלק עליון - סרגל ניווט
             <header>
                 <nav className={style.links}>
                     <Link to="/home">
@@ -36,7 +36,7 @@ const Home: React.FC = () => {
                         <dt>Logout</dt>
                     </a>
                 </nav>
-            </header>
+            </header> */}
 
             {/* חלק אמצעי - תמונה וכיתוב */}
             <div className={style.heroSection}>

@@ -25,19 +25,19 @@ const Layout: React.FC = () => {
             <header>
                 {/* <h1>Hi {currentUser?.name}</h1> */}
                 <nav className={style.links}>
-                    <Link to={`/home`}>
+                <Link to="/home">
                         <dt>דף הבית</dt>
                     </Link>
-                    <Link to={`/about`}>
+                    <Link to="/about">
                         <dt>קצת עלינו</dt>
                     </Link>
-                    <Link to={`/order`}>
+                    <Link to="/order">
                         <dt>הזמנות</dt>
                     </Link>
-                    <Link to={`/gallery`}>
+                    <Link to="/gallery">
                         <dt>גלריה</dt>
                     </Link>
-                    <Link to={`/cart`}>
+                    <Link to="/cart">
                         <dt>הסל שלי</dt>
                     </Link>
                     <a onClick={handleLogout}>
