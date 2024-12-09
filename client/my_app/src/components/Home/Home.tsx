@@ -14,30 +14,6 @@ const Home: React.FC = () => {
 
     return (
         <>
-            {/* חלק עליון - סרגל ניווט
-            <header>
-                <nav className={style.links}>
-                    <Link to="/home">
-                        <dt>דף הבית</dt>
-                    </Link>
-                    <Link to="/about">
-                        <dt>קצת עלינו</dt>
-                    </Link>
-                    <Link to="/order">
-                        <dt>הזמנות</dt>
-                    </Link>
-                    <Link to="/gallery">
-                        <dt>גלריה</dt>
-                    </Link>
-                    <Link to="/cart">
-                        <dt>הסל שלי</dt>
-                    </Link>
-                    <a onClick={handleLogout}>
-                        <dt>Logout</dt>
-                    </a>
-                </nav>
-            </header> */}
-
             {/* חלק אמצעי - תמונה וכיתוב */}
             <div className={style.heroSection}>
                 <img
