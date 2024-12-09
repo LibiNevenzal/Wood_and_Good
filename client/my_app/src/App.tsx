@@ -3,7 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home/Home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Order from './components/Home/Order/Order';
+import Order from './components/Order/Order';
+import Layout from './components/Layout/Layout';
+import SignupForm from './components/SignupForm/SignupForm';
 
 function App() {
   return (
