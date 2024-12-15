@@ -1,55 +1,105 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-// import { userContext } from "../../App";
-import style from "./Layout.module.css";
-
-// טיפוס עבור ה-Context (אם תשתמשי בו בעתיד)
-// interface UserContextType {
-//     currentUser: { id: string; name: string };
-//     setCurrentUser: (user: null | { id: string; name: string }) => void;
-// }
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 const Layout: React.FC = () => {
-    const navigate = useNavigate();
-    // const { currentUser, setCurrentUser } = useContext(userContext as React.Context<UserContextType>);
-    // const userId = currentUser?.id;
+  const navigate = useNavigate();
 
-    const handleLogout = (): void => {
-        localStorage.removeItem("currentUser");
-        navigate("/login");
-        // setCurrentUser(null);
-    };
+  // State for shop dropdown menu
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
 
-    return (
-        <>
-            <header>
-                {/* <h1>Hi {currentUser?.name}</h1> */}
-                <nav className={style.links}>
-                <Link to="/home">
-                        <dt>דף הבית</dt>
-                    </Link>
-                    <Link to="/about">
-                        <dt>קצת עלינו</dt>
-                    </Link>
-                    <Link to="/shop">
-                        <dt>חנות</dt>
-                    </Link>
-                    <Link to="/gallery">
-                        <dt>גלריה</dt>
-                    </Link>
-                    <Link to="/cart">
-                        <dt>הסל שלי</dt>
-                    </Link>
-                    <a onClick={handleLogout}>
-                        <dt>Logout</dt>
-                    </a>
-                </nav>
-            </header>
-            <div className={style.content}>
-                <Outlet />
-            </div>
-        </>
-    );
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = (): void => {
+    localStorage.removeItem("currentUser");
+    navigate("/login");
+  };
+
+  return (
+    <>
+      <AppBar position="static" color="primary">
+        <Toolbar>
+          {/* דף הבית */}
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            <Button color="inherit" component={Link} to="/home">
+              דף הבית
+            </Button>
+          </Typography>
+
+          {/* קצת עלינו */}
+          <Button color="inherit" component={Link} to="/about">
+            קצת עלינו
+          </Button>
+
+          {/* חנות - Dropdown Menu */}
+          <Button
+            color="inherit"
+            onClick={handleMenuOpen}
+            aria-controls={open ? "shop-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+          >
+            חנות
+          </Button>
+          <Menu
+            id="shop-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleMenuClose}
+          >
+            <MenuItem
+              onClick={handleMenuClose}
+              component={Link}
+              to="/shop/ready-signs"
+            >
+              שלטים מוכנים
+            </MenuItem>
+            <MenuItem
+              onClick={handleMenuClose}
+              component={Link}
+              to="/shop/custom-signs"
+            >
+              שלטים בהזמנה אישית
+            </MenuItem>
+          </Menu>
+
+          {/* גלריה */}
+          <Button color="inherit" component={Link} to="/gallery">
+            גלריה
+          </Button>
+
+          {/* הסל שלי */}
+          <Button color="inherit" component={Link} to="/cart">
+            הסל שלי
+          </Button>
+
+          {/* Logout */}
+          <Button color="inherit" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Toolbar>
+      </AppBar>
+
+      {/* תוכן מרכזי */}
+      <Box sx={{ p: 2 }}>
+        <Outlet />
+      </Box>
+    </>
+  );
 };
 
 export default Layout;
