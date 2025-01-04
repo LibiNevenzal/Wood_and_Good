@@ -4,7 +4,7 @@ import cors from 'cors';
 // import { registerRouter } from './router/registerRouter.js'
 // import { usersRouter } from './router/usersRouter.js';
 // import { giftsRouter } from './router/giftsRouter.js';
-// import { contactsRouter } from './router/contactsRouter.js';
+import { readySignsRouter } from './router/readySignsRouter.js';
 // import { giftsDeliveryRouter } from './router/giftsDeliveryRouter.js';
 // import { donationsRouter } from './router/donationsRouter.js';
 // import bodyparser from 'body-parser';
@@ -13,14 +13,11 @@ import cors from 'cors';
 // import cookieParser from 'cookie-parser';
 
 const app = express();
-app.use(cors({
-    origin: process.env.CLIENT_URL,
-    credentials: true
-}));
+app.use(cors());
 
-// app.use(express.json());
+app.use(express.json());
 
-// app.use('/donors',authenticateToken,donorsRouter);
+app.use('/readySign',readySignsRouter);
 // app.use('/donations',authenticateToken, donationsRouter);
 // app.use('/register', registerRouter);
 // app.use('/users', usersRouter);
