@@ -1,7 +1,5 @@
 import { executeQuery } from './db.js'
 import { addQuery, updateQuery, getByIdQuery, getByConditionQuery, deleteQuery } from '../queries/genericQueries.js'
-import { DonorsService } from './donorsService.js'
-const donorsService = new DonorsService
 export class ReadySignsService {
 
     async getReadySigns(queryParams) {
