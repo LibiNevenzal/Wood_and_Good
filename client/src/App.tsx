@@ -6,7 +6,7 @@ import Layout from './components/Layout/Layout';
 import ReadySigns from './components/ReadySigns/ReadySigns';
 import CustomSigns from './components/CustomSigns/CustomSigns';
 import Cart from './components/ShoppingCart/ShoppingCart';
-// import PaymentForm from './components/Paymant/PaymentForm';
+import PaymentForm from './components/Paymant/PaymentForm';
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Route path="shop/ready-signs" element={<ReadySigns />} />
           <Route path="shop/custom-signs" element={<CustomSigns />} />
           <Route path="cart" element={<Cart />} />
-          {/* <Route path="payment" element={<PaymentForm />} /> */}
+          <Route path="payment" element={<PaymentForm />} />
 
         </Route>
   
