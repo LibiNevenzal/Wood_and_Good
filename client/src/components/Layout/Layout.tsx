@@ -42,6 +42,10 @@ const Layout: React.FC = () => {
         navigate("/login");
     };
 
+    const handleCart = (): void => {
+        navigate('/cart');
+    }
+
     return (
         <>
             <AppBar position="static" sx={{ backgroundColor: "#D2B48C" }}>
@@ -96,8 +100,8 @@ const Layout: React.FC = () => {
                     </Button>
 
                     {/* הסל שלי */}
-                    <Button color="inherit" component={Link} to="/cart">
-                        הסל שלי
+                    <Button color="inherit" onClick={handleCart}>
+                        העגלה שלי
                     </Button>
 
                     {/* Logout */}
