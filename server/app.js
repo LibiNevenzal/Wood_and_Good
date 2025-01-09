@@ -13,18 +13,19 @@ import { readySignsRouter } from './router/readySignsRouter.js';
 // import cookieParser from 'cookie-parser';
 
 const app = express();
-app.use(cors());
+app.use(cors(
+    {
+        origin: "http://localhost:3000",
+        credentials: true,
+      }
+));
 
 app.use(express.json());
 
 app.use('/readySign',readySignsRouter);
-// app.use('/donations',authenticateToken, donationsRouter);
-// app.use('/register', registerRouter);
-// app.use('/users', usersRouter);
-// app.use('/gifts', giftsRouter);
-// app.use('/contacts',authenticateToken, contactsRouter);
-// app.use('/giftsDelivery',authenticateToken, giftsDeliveryRouter);
-// app.use('/register/forgotPassword', forgotPasswordRouter);
+// app.use('/customSign',customSignRouter);
+
+
 
 app.listen(8081, (err) => {
     if (err) console.error(err);

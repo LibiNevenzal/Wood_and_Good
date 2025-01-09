@@ -54,13 +54,12 @@ const CustomSigns: React.FC = () => {
           paddingRight: '20px',
         }}
       >
-        <img src={dogImage} alt="Dog" style={{ width: '100%', borderRadius: '8px' }} />
+        <img src={dogImage} alt="Dog" style={{ width: '50%', borderRadius: '8px' }} />
       </Box>
 
-      <Box sx={{ flex: 2 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <Typography variant="h6" sx={{ marginBottom: '16px', fontWeight: 'bold' }}>
-          אישור פרטי השלט המותאם
-        </Typography>
+          :בחר את השלט שלך </Typography>
 
         {/* סוג עץ */}
         <FormControl component="fieldset" sx={{ marginBottom: '16px' }}>
