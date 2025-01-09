@@ -1,6 +1,11 @@
 import 'dotenv/config'
 const db = process.env.DB_NAME;
 
+function getAllQuery(table_name) {
+    const query = `SELECT * FROM ${db}.${table_name}`;
+    return query;
+}
+
 function getByConditionQuery(tableName, queryParams) {
     let fields = queryParams.fields || '*';
     let filter = queryParams.filter || '';
@@ -89,6 +94,7 @@ function patchQuery(table_name, queryParams, idKey) {
 }
 
 export {
+    getAllQuery,
     getByConditionQuery,
     getByIdQuery,
     deleteQuery,

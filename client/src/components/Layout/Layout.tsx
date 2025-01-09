@@ -8,6 +8,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const Layout: React.FC = () => {
     const navigate = useNavigate();
@@ -101,7 +102,7 @@ const Layout: React.FC = () => {
 
                     {/* הסל שלי */}
                     <Button color="inherit" onClick={handleCart}>
-                        העגלה שלי
+                    <AddShoppingCartIcon fontSize="medium"/>
                     </Button>
 
                     {/* Logout */}
