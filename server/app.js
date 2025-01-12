@@ -23,7 +23,7 @@ app.use(cors(
 app.use(express.json());
 
 app.use('/readySign',readySignsRouter);
-app.use('/custom_signs', customSignsRouter);
+app.use('/customSigns', customSignsRouter);
 // app.use('/register', registerRouter);
 // app.use('/users', usersRouter);
 // app.use('/gifts', giftsRouter);
