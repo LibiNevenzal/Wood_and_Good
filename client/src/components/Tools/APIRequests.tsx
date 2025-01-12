@@ -33,9 +33,9 @@ export const getRequest = async (
 
     if (responseData.data.length === 0) {
       switch (object) {
-        case "תורם":
-        case "משתמש":
-        case "איש קשר":
+        case "שלט":
+        // case "משתמש":
+        // case "איש קשר":
           comment(`לא נמצא ${object}`);
           break;
         case "כתובת מייל":
