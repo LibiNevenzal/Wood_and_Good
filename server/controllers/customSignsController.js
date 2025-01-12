@@ -1,8 +1,7 @@
 import { CustomSignsService } from '../service/customSignsService.js';
 export class CustomSignsController {
 
-    async getSignsDTO(req, res, next) {
-        try {
+    async getSignsDTO(req, res, next) {        try {
             const customSignsService = new CustomSignsService();
             console.log("hhhhhhhhhh"+req.query);
             const resultItems = await customSignsService.getSignsDTO();
