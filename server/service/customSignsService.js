@@ -1,6 +1,6 @@
 import { executeQuery } from './db.js'
 import { getAllQuery,addQuery, updateQuery, getByIdQuery, getByConditionQuery, deleteQuery } from '../queries/genericQueries.js'
-export class ReadySignsService {
+export class CustomSignsService  {
 
     async getSignsAttribute() {
         const decorationQuery = getAllQuery("decorations");
