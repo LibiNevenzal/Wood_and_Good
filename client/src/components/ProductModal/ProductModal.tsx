@@ -1,76 +1,43 @@
-import React, { FC, useState, useEffect } from 'react';
 import {
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Link,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   Button,
+  Typography,
   TextField,
-  Box,
+  Box
 } from '@mui/material';
-import { getRequest } from "../Tools/APIRequests";
-import axios from 'axios';
 
-// קומפוננטת המודל
 interface ProductModalProps {
   open: boolean;
   onClose: () => void;
-  productId: string | null;
+  product: any | null;
 }
 
-const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, productId }) => {
-  const [productDetails, setProductDetails] = useState<any>(null);
-  const [inputValue, setInputValue] = useState<string>('');
-
-  useEffect(() => {
-    if (open && productId) {
-      axios
-        .get(`/api/products/${productId}`)
-        .then((response) => {
-          setProductDetails(response.data);
-        })
-        .catch((error) => {
-          console.error('Error fetching product data:', error);
-        });
-    }
-  }, [open, productId]);
-
-  const handleAddToCart = () => {
-    console.log(`Adding to cart: ${productDetails.name}, Input: ${inputValue}`);
-    onClose();
-  };
-
+const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, product }) => {
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-      <DialogTitle>{productDetails?.name || 'Loading...'}</DialogTitle>
+      <DialogTitle>{product?.name || 'Loading...'}</DialogTitle>
       <DialogContent>
-        {productDetails ? (
+        {product ? (
           <Box>
             <Typography variant="body1" gutterBottom>
-              {productDetails.description}
+              {product.description}
             </Typography>
             <Box display="flex" justifyContent="center" mb={2}>
               <img
-                src={productDetails.image}
-                alt={productDetails.name}
+                src={product.imageUrl}
+                alt={product.name}
                 style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px' }}
               />
             </Box>
-            <TextField
-              label="Add your notes"
-              fullWidth
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              multiline
-              rows={3}
-              variant="outlined"
-            />
+            <Typography variant="h6" gutterBottom>
+              מחיר: {product.price} ₪
+            </Typography>
+            <Typography variant="body2">
+              סוג עץ: {product.woodType}
+            </Typography>
           </Box>
         ) : (
           <Typography>Loading product details...</Typography>
@@ -78,14 +45,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, productId })
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">
-          Cancel
+          ביטול
         </Button>
-        <Button
-          onClick={handleAddToCart}
-          color="primary"
-          disabled={!productDetails}
-        >
-          Add to Cart
+        <Button onClick={onClose} color="primary">
+          הוסף לעגלה
         </Button>
       </DialogActions>
     </Dialog>
