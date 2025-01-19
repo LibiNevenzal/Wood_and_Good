@@ -80,84 +80,82 @@
 
 
 
-
-
-
-
 import React, { FC, useState, useEffect } from 'react';
-import { Grid, Card, CardContent, CardMedia, Typography, Link } from '@mui/material';
-import { getRequest } from "../Tools/APIRequests"; 
+import { Grid, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { getRequest } from "../Tools/APIRequests";
 import ProductModal from '../ProductModal/ProductModal';
 
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  woodType: string;
+  imageUrl: string;
+}
+
 const ReadySigns: FC = () => {
-    const [products, setProducts] = useState<any[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-    const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          setLoading(true);
-          const total = await getRequest(
-            "readySign",
-            "?_limit=10",
-            setProducts,
-            setError,
-            "שלט"
-          );
-          setLoading(false);
-        } catch (err) {
-          setError("שגיאה בטעינת הנתונים");
-          setLoading(false);
-        }
-      };
-  
-      fetchData();
-    }, []);
-  
-    const handleCardClick = (productId: string) => {
-      setSelectedProductId(productId);
-      setIsModalOpen(true);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        await getRequest("readySign", "?_limit=10", setProducts, setError, "שלט");
+        setLoading(false);
+      } catch (err) {
+        setError("שגיאה בטעינת הנתונים");
+        setLoading(false);
+      }
     };
-  
-    const handleCloseModal = () => {
-      setIsModalOpen(false);
-      setSelectedProductId(null);
-    };
-  
-    if (loading) return <div>טעינה...</div>;
-    if (error) return <div>{error}</div>;
-  
-    return (
-      <>
-        <Grid container spacing={2}>
-          {products.map((product) => (
-            <Grid item xs={12} sm={6} md={3} key={product.id}>
-              <Card onClick={() => handleCardClick(product.id)} style={{ cursor: 'pointer' }}>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={product.imageUrl}
-                  alt={product.name}
-                />
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    {product.name}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    מחיר: {product.price} ₪
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-        <ProductModal open={isModalOpen} onClose={handleCloseModal} productId={selectedProductId} />
-      </>
-    );
+
+    fetchData();
+  }, []);
+
+  const handleCardClick = (product: Product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
   };
-  
-  export default ReadySigns;
-  
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(null);
+  };
+
+  if (loading) return <div>טעינה...</div>;
+  if (error) return <div>{error}</div>;
+
+  return (
+    <>
+      <Grid container spacing={2}>
+        {products.map((product) => (
+          <Grid item xs={12} sm={6} md={3} key={product.id}>
+            <Card onClick={() => handleCardClick(product)} style={{ cursor: 'pointer' }}>
+              <CardMedia
+                component="img"
+                height="140"
+                image={product.imageUrl}
+                alt={product.name}
+              />
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  {product.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  מחיר: {product.price} ₪
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+      <ProductModal open={isModalOpen} onClose={handleCloseModal} product={selectedProduct} />
+    </>
+  );
+};
+
+export default ReadySigns;
