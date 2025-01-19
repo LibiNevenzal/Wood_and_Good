@@ -1,12 +1,11 @@
-import { CustomSignsService } from '../service/customSignsService.js'
 
-export class CustomSignsController {
+export class UsersController {
 
-    async getSignsDTO(req, res, next) {
+    async getUsers(req, res, next) {
         try {
-            const customSignsService = new CustomSignsService();
+            const usersService = new UsersService();
             console.log("hhhhhhhhhh"+req.query);
-            const resultItems = await customSignsService.getSignsDTO();
+            const resultItems = await usersService.getUsers();
             return res.json(resultItems);
         }
         catch (ex) {
@@ -18,10 +17,10 @@ export class CustomSignsController {
 
     }
     
-    async getContactById(req, res, next) {
+    async getUserById(req, res, next) {
         try {
-            const contactsService = new ContactsService();
-            const resultItems = await contactsService.getContactById(req.params.id);
+            const usersService = new UsersService();
+            const resultItems = await usersService.login(req.paramsid);
             return res.json({data: resultItems });
         }
         catch (ex) {
@@ -32,10 +31,10 @@ export class CustomSignsController {
         }
     }
 
-    async updateContact(req, res, next) {
+    async updateUser(req, res, next) {
         try {
-            const contactsService = new ContactsService();
-            const resultItems = await contactsService.updateContact(req.body, req.params.id);
+            const usersService = new UsersService();
+            const resultItems = await usersService.updateUser(req.body, req.params.id);
             return res.json(resultItems);
         }
         catch (ex) {
@@ -46,10 +45,10 @@ export class CustomSignsController {
         }
     }
 
-    async deleteContact(req, res, next) {
+    async deleteUser(req, res, next) {
         try {
-            const contactsService = new ContactsService();
-            await contactsService.deleteContact("id",req.params.id);
+            const usersService = new UsersService();
+            await usersService.deleteUser("id",req.params.id);
             return res.json({ data: req.params.id });
         }
         catch (ex) {
@@ -59,10 +58,11 @@ export class CustomSignsController {
             next(err)
         }
     }
-    async addContact(req, res, next) {
+    async addUser(req, res, next) {
         try {
-            const contactsService = new ContactsService();
-            const resultItem = await contactsService.addContact(req.body);
+            //לבדוק הרשאות!!!
+            const usersService = new UsersService();
+            const resultItem = await usersService.signin(req.body);
             res.json({ insertId: resultItem.insertId });
         }
         catch (ex) {

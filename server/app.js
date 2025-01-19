@@ -2,11 +2,11 @@ import express from 'express';
 import cors from 'cors';
 // import { donorsRouter } from './router/donorsRouter.js'
 // import { registerRouter } from './router/registerRouter.js'
-// import { usersRouter } from './router/usersRouter.js';
+import { usersRouter } from './router/usersRouter.js';
 // import { giftsRouter } from './router/giftsRouter.js';
 import { readySignsRouter } from './router/readySignsRouter.js';
 import { customSignsRouter } from './router/customSignsRouter.js';
-// import { donationsRouter } from './router/donationsRouter.js';
+import { registerRouter } from './router/registerRouter.js';
 // import bodyparser from 'body-parser';
 // import {authenticateToken} from './middleware/authenticateToken.js';
 // import { forgotPasswordRouter } from './router/forgotPasswordRouter.js';
@@ -24,6 +24,10 @@ app.use(express.json());
 
 app.use('/readySign',readySignsRouter);
 app.use('/customSigns', customSignsRouter);
+app.use('/usersRouter', usersRouter);
+app.use('/registerRouter', registerRouter);
+
+
 // app.use('/register', registerRouter);
 // app.use('/users', usersRouter);
 // app.use('/gifts', giftsRouter);

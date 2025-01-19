@@ -1,5 +1,5 @@
 import express from "express";
-import { CustomSignsController } from "../controllers/customSignsController.js";
+import { CustomSignsController } from '../controllers/customSignsController.js';
 
 const customSignsRouter = express.Router();
 
