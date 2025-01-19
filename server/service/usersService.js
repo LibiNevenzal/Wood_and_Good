@@ -1,10 +1,11 @@
 import { executeQuery } from './db.js'
 import { getAllQuery,addQuery, updateQuery, getByIdQuery, getByConditionQuery, deleteQuery } from '../queries/genericQueries.js'
-export class CustomSignsService {
+export class UsersService {
 
-    async getSignsDTO() {
-        const decorationQuery = getAllQuery("decorations");
-        const decorationsResult = await executeQuery(decorationQuery);
+    async getUsers() {
+        const usersQuery = getAllQuery("users");
+        const usersResult = await executeQuery(usersQuery);
+        //
         const finishQuery = getAllQuery("finishes");
         const finishesResult = await executeQuery(finishQuery);
         const materialTypeQuery = getAllQuery("material_types");
@@ -13,7 +14,7 @@ export class CustomSignsService {
         const sizesResult = await executeQuery(sizeQuery);
         const fontQuery = getAllQuery("fonts");
         const fontsResult = await executeQuery(fontQuery);
-        return {'decorationsResult':decorationsResult,
+        return {'usersResult':usersResult,
                 'finishesResult':finishesResult,
                 'materialTypesResult':materialTypesResult,
                 'sizesResult':sizesResult,
