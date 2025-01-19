@@ -232,6 +232,7 @@ import {
   Button,
   Card,
   CircularProgress,
+  TextField,
 } from "@mui/material";
 import { getRequest } from "../Tools/APIRequests";
 
@@ -262,6 +263,7 @@ const CustomSignForm = () => {
   const [finish, setFinish] = useState("");
   const [selectedIcon, setSelectedIcon] = useState<string[]>([]);
   const [showIcons, setShowIcons] = useState(false);
+  const [engravingText, setEngravingText] = useState("");
   const [error, setError] = useState<ErrorState>({
     wood: false,
     size: false,
@@ -342,6 +344,7 @@ const CustomSignForm = () => {
       selectedFont,
       finish,
       selectedIcon,
+      engravingText,
     });
   };
 
@@ -455,6 +458,19 @@ const CustomSignForm = () => {
                     </Grid>
                   )}
                 </FormControl>
+              </Grid>
+
+              {/* שדה טקסט לחריטה */}
+              <Grid item xs={12}>
+                <TextField
+                  label="מה תרצה לחרוט על השלט?"
+                  variant="outlined"
+                  fullWidth
+                  multiline
+                  rows={1}
+                  value={engravingText}
+                  onChange={(e) => setEngravingText(e.target.value)}
+                />
               </Grid>
             </Grid>
 
