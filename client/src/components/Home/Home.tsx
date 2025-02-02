@@ -5,14 +5,26 @@ import woodImage from "./wood.png";
 import exampleImage from "./example.png";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { Box, Typography, IconButton, Grid } from "@mui/material";
-
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 const Home: React.FC = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogout = (): void => {
         localStorage.removeItem("currentUser");
         navigate("/login");
     };
+    useEffect(() => {
+        if (location.state?.scrollTo) {
+            const section = document.getElementById(location.state.scrollTo);
+            if (section) {
+                setTimeout(() => {
+                    section.scrollIntoView({ behavior: "smooth" });
+                }, 300);
+            }
+        }
+    }, [location]);
 
     return (
         <>

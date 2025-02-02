@@ -25,18 +25,27 @@ const Layout: React.FC = () => {
     };
 
     const handleScrollToAbout = () => {
-        const aboutSection = document.getElementById("about-section");
-        if (aboutSection) {
-            aboutSection.scrollIntoView({ behavior: "smooth" });
+        if (window.location.pathname !== "/home") {
+            navigate("/home", { state: { scrollTo: "about-section" } });
+        } else {
+            const aboutSection = document.getElementById("about-section");
+            if (aboutSection) {
+                aboutSection.scrollIntoView({ behavior: "smooth" });
+            }
         }
     };
-
+    
     const handleScrollToGallery = () => {
-      const gallerySection = document.getElementById("gallery-section");
-      if (gallerySection) {
-          gallerySection.scrollIntoView({ behavior: "smooth" });
-      }
-  };
+        if (window.location.pathname !== "/home") {
+            navigate("/home", { state: { scrollTo: "gallery-section" } });
+        } else {
+            const gallerySection = document.getElementById("gallery-section");
+            if (gallerySection) {
+                gallerySection.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    };
+    
 
     const handleLogout = (): void => {
         localStorage.removeItem("currentUser");
