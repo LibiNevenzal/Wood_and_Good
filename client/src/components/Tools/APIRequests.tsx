@@ -21,6 +21,7 @@ export const getRequest = async (
     const response = await fetch(url, {
       headers: {
         Origin: `http://${config.SERVERPORT}`,
+        
       },
       credentials: "include",
     });

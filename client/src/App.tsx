@@ -17,6 +17,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="shop/ready-signs" element={<ReadySigns />} />
+          <Route path="home" element={<Home />} />
           <Route path="shop/custom-signs" element={<CustomSigns />} />
           <Route path="cart" element={<Cart />} />
           <Route path="payment" element={<PaymentForm />} />

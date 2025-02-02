@@ -12,6 +12,7 @@ import { registerRouter } from './router/registerRouter.js';
 // import { forgotPasswordRouter } from './router/forgotPasswordRouter.js';
 // import cookieParser from 'cookie-parser';
 
+
 const app = express();
 app.use(cors(
     {

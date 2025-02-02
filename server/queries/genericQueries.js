@@ -7,6 +7,9 @@ function getAllQuery(table_name) {
 }
 
 function getByConditionQuery(tableName, queryParams) {
+    console.log("tableName"+tableName);
+    console.log("queryParams"+queryParams);
+
     let fields = queryParams.fields || '*';
     let filter = queryParams.filter || '';
     let limit = queryParams._limit;

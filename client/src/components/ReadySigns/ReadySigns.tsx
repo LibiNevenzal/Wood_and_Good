@@ -88,10 +88,10 @@ import ProductModal from '../ProductModal/ProductModal';
 interface Product {
   id: string;
   name: string;
-  description: string;
   price: number;
-  woodType: string;
-  imageUrl: string;
+  material_type_id: string;
+  image_key: string;
+  size_id:string;
 }
 
 const ReadySigns: FC = () => {
@@ -114,6 +114,8 @@ const ReadySigns: FC = () => {
     };
 
     fetchData();
+    console.log("Products: ", products);
+
   }, []);
 
   const handleCardClick = (product: Product) => {
@@ -132,30 +134,34 @@ const ReadySigns: FC = () => {
   return (
     <>
       <Grid container spacing={2}>
-        {products.map((product) => (
-          <Grid item xs={12} sm={6} md={3} key={product.id}>
-            <Card onClick={() => handleCardClick(product)} style={{ cursor: 'pointer' }}>
-              <CardMedia
-                component="img"
-                height="140"
-                image={product.imageUrl}
-                alt={product.name}
-              />
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  {product.name}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  מחיר: {product.price} ₪
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
+        {products.map((product) => {
+          console.log("Image URL: ", product.image_key); // הוספתי את הדפסת ה-URL כאן
+          return (
+            <Grid item xs={12} sm={6} md={3} key={product.id}>
+              <Card onClick={() => handleCardClick(product)} style={{ cursor: 'pointer' }}>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={product.image_key|| 'default-image-url'}
+                  alt={product.name}
+                />
+                <CardContent>
+                  <Typography variant="h6" gutterBottom>
+                    {product.name}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    מחיר: {product.price} ₪
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          );
+        })}
       </Grid>
-      <ProductModal open={isModalOpen} onClose={handleCloseModal} product={selectedProduct} />
+      <ProductModal open={isModalOpen} onClose={handleCloseModal} product={selectedProduct}/>
     </>
   );
+  
 };
 
 export default ReadySigns;

@@ -3,7 +3,6 @@ import { addQuery, updateQuery, getByIdQuery, getByConditionQuery, deleteQuery }
 export class ReadySignsService {
 
     async getReadySigns(queryParams) {
-        console.log("gggggggggggg"+queryParams);
         const { dataQuery, countQuery } = getByConditionQuery("ready_signs", queryParams);
         const values = Object.values(queryParams);
         const data = await executeQuery(dataQuery, values);
@@ -11,9 +10,9 @@ export class ReadySignsService {
         return { data, total };
     }
 
-    async getContactById(id) {
-        const queryPost = getByIdQuery("contacts");
-        const result = await executeQuery(queryPost, [id]);
+    async getReadySignById(id) {
+        const querySign = getByIdQuery("ready_signs");
+        const result = await executeQuery(querySign, [id]);
         return result;
     }
 

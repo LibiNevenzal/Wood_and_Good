@@ -6,8 +6,8 @@ export class ReadySignsController {
     async getReadySigns(req, res, next) {
         try {
             const readySignsService = new ReadySignsService();
-            console.log("hhhhhhhhhh"+req.query);
             const resultItems = await readySignsService.getReadySigns(req.query);
+            console.log("res "+resultItems)
             return res.json(resultItems);
         }
         catch (ex) {
@@ -19,10 +19,10 @@ export class ReadySignsController {
 
     }
     
-    async getContactById(req, res, next) {
+    async getReadySignById(req, res, next) {
         try {
-            const contactsService = new ContactsService();
-            const resultItems = await contactsService.getContactById(req.params.id);
+            const readySignsService = new ReadySignsService();
+            const resultItems = await readySignsService.getReadySignById(req.params.id);
             return res.json({data: resultItems });
         }
         catch (ex) {
