@@ -3,16 +3,14 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import CartPreview from "../CartPreview/CartPreview";
 
 const Layout: React.FC = () => {
     const navigate = useNavigate();
-
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -34,7 +32,7 @@ const Layout: React.FC = () => {
             }
         }
     };
-    
+
     const handleScrollToGallery = () => {
         if (window.location.pathname !== "/home") {
             navigate("/home", { state: { scrollTo: "gallery-section" } });
@@ -45,16 +43,11 @@ const Layout: React.FC = () => {
             }
         }
     };
-    
 
     const handleLogout = (): void => {
         localStorage.removeItem("currentUser");
         navigate("/login");
     };
-
-    const handleCart = (): void => {
-        navigate('/cart');
-    }
 
     return (
         <>
@@ -109,10 +102,8 @@ const Layout: React.FC = () => {
                         גלריה
                     </Button>
 
-                    {/* הסל שלי */}
-                    <Button color="inherit" onClick={handleCart}>
-                    <AddShoppingCartIcon fontSize="medium"/>
-                    </Button>
+                    {/* עגלת קניות */}
+                    <CartPreview />
 
                     {/* Logout */}
                     <Button color="inherit" onClick={handleLogout}>

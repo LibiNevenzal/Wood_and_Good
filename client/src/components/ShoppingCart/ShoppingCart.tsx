@@ -200,6 +200,18 @@ const Cart: React.FC = () => {
                     <strong>איקונים:</strong> {item.icons.join(', ')}
                   </Typography>
                 )}
+
+                {/* חריטה */}
+                {item.engravingText && (
+                  <Typography variant="body1">
+                    <strong>חריטה:</strong> {item.engravingText}
+                  </Typography>
+                )}
+
+                {/* מחיר */}
+                <Typography variant="body1">
+                  <strong>מחיר:</strong> {item.price} ש"ח
+                </Typography>
               </CardContent>
 
               <Box sx={{ display: 'flex', alignItems: 'center', padding: '16px' }}>
