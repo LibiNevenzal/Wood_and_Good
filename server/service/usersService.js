@@ -45,9 +45,9 @@ export class UsersService {
         return result;
     }
 
-    async addContact(newItem) {
-        const values = Object.values(newItem);
-        const queryUser = addQuery("contacts", newItem);
+    async addUser(newUser) {
+        const values = Object.values(newUser);
+        const queryUser = addQuery("users", newUser);
         const result = await executeQuery(queryUser, values);
         return result;
     }

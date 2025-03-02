@@ -1,4 +1,4 @@
-
+import { UsersService } from "../service/usersService.js";
 export class UsersController {
 
     async getUsers(req, res, next) {
@@ -60,9 +60,9 @@ export class UsersController {
     }
     async addUser(req, res, next) {
         try {
-            //לבדוק הרשאות!!!
+            console.log("mmmmmmmmmmmmm"+ req.body);
             const usersService = new UsersService();
-            const resultItem = await usersService.signin(req.body);
+            const resultItem = await usersService.addUser(req.body);
             res.json({ insertId: resultItem.insertId });
         }
         catch (ex) {

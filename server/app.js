@@ -25,7 +25,7 @@ app.use(express.json());
 
 app.use('/readySign',readySignsRouter);
 app.use('/customSigns', customSignsRouter);
-app.use('/usersRouter', usersRouter);
+app.use('/users', usersRouter);
 app.use('/registerRouter', registerRouter);
 
 
