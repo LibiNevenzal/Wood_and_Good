@@ -140,8 +140,11 @@ const Cart: React.FC = () => {
   };
 
   const handlePaymaent = () => {
+    const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+    localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
     navigate('/payment');
   };
+  
 
   const handleGoBack = () => {
     navigate(-1); // Navigate back to the previous page

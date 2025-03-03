@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { TextField, Button, Grid, Typography, Box, Container, Paper } from "@mui/material";
+import { useNavigate } from 'react-router-dom';
 import { config } from '../config';
 
 interface IFormInput {
@@ -14,11 +15,28 @@ interface IFormInput {
 }
 
 const SignupForm: React.FC = () => {
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
+
+  useEffect(() => {
+    // טעינת עגלת הקניות מה-localStorage
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      setCartItems(JSON.parse(savedCart));
+    }
+
+    // טעינת הסכום הכולל
+    const savedTotalPrice = localStorage.getItem('totalPrice');
+    if (savedTotalPrice) {
+      setTotalPrice(JSON.parse(savedTotalPrice));
+    }
+  }, []);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data: IFormInput) => {
     console.log("User Registered:", data);
@@ -40,6 +58,7 @@ const SignupForm: React.FC = () => {
     } catch (error) {
       console.error("Error registering user:", error);
     }
+    navigate('/credit-card');
   };
 
   return (
@@ -142,3 +161,7 @@ const SignupForm: React.FC = () => {
 };
 
 export default SignupForm;
+
+
+
+

@@ -3,6 +3,8 @@ import cors from 'cors';
 // import { donorsRouter } from './router/donorsRouter.js'
 // import { registerRouter } from './router/registerRouter.js'
 import { usersRouter } from './router/usersRouter.js';
+import { ordersRouter } from './router/ordersRouter.js';
+
 // import { giftsRouter } from './router/giftsRouter.js';
 import { readySignsRouter } from './router/readySignsRouter.js';
 import { customSignsRouter } from './router/customSignsRouter.js';
@@ -26,7 +28,10 @@ app.use(express.json());
 app.use('/readySign',readySignsRouter);
 app.use('/customSigns', customSignsRouter);
 app.use('/users', usersRouter);
+app.use('/orders', ordersRouter);
+
 app.use('/registerRouter', registerRouter);
+
 
 
 // app.use('/register', registerRouter);
