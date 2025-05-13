@@ -1,64 +1,18 @@
-/* .links {
-    display: flex;
-    justify-content: space-around;
-    background-color: #f4f4f4;
-    padding: 10px 0;
-}
-
-.links a {
-    text-decoration: none;
-    color: #333;
-    font-size: 1.2rem;
-}
-
 .heroSection {
-    position: relative;
-    text-align: center;
-    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100vh; 
+    width: 100%;
+    /* background-color: #f5f5f5;  */
 }
 
 .heroImage {
-    width: 100%;
-    opacity: 0.6;
-    filter: brightness(0.8);
+    width: 80%; /* במקום 100%, כך שהתמונה תישאר גדולה אך לא תשתלט על כל הרוחב */
+    height: 100%;
+    border-radius: 10px; 
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);  */
 }
 
-.heroText {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3rem;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
 
-.footer {
-    background-color: #d2b48c;
-    padding: 20px;
-    text-align: center;
-}
 
-.footerContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #333;
-}
-
-.footerContent h3 {
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-}
-
-.footerContent a {
-    margin: 5px 0;
-    text-decoration: none;
-    color: #333;
-    font-size: 1rem;
-}
-
-.footerContent p {
-    margin-top: 10px;
-    font-size: 1.2rem;
-} */

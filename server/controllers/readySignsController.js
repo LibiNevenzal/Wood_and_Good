@@ -60,17 +60,17 @@ export class ReadySignsController {
             next(err)
         }
     }
-    async addContact(req, res, next) {
-        try {
-            const contactsService = new ContactsService();
-            const resultItem = await contactsService.addContact(req.body);
-            res.json({ insertId: resultItem.insertId });
-        }
-        catch (ex) {
-            const err = {}
-            err.statusCode = 500;
-            err.message = ex;
-            next(err)
-        }
+
+async addReadySign(req, res, next) {
+    try {
+        const readySignsService = new ReadySignsService();
+        const result = await readySignsService.addReadySign(req.body);
+        res.json({ insertId: result.insertId });
+    } catch (ex) {
+        const err = new Error("שגיאה בהוספת שלט מוכן");
+        err.statusCode = 500;
+        return next(err);
     }
+}
+
 }

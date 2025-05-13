@@ -150,6 +150,10 @@ const Cart: React.FC = () => {
     navigate(-1); // Navigate back to the previous page
   };
 
+  const getTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + Number(item.price), 0);
+};
+
   return (
     <Box sx={{ padding: '20px', maxWidth: '800px', margin: 'auto', direction: 'rtl', textAlign: 'center' }}>
       <Typography variant="h6" sx={{ marginBottom: '16px', fontWeight: 'bold' }}>
@@ -224,15 +228,23 @@ const Cart: React.FC = () => {
               </Box>
             </Card>
           ))}
-
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ marginTop: '20px' }}
-            onClick={handlePaymaent}
-          >
-            המשך לתשלום
-          </Button>
+<Typography variant="h6" sx={{ textAlign: "center", fontWeight: "bold" }}>
+                                סה"כ: {getTotalPrice()} ש"ח
+                            </Typography>
+<Button
+  variant="contained"
+  sx={{
+    marginTop: "10px",
+    padding: "8px 24px", 
+    fontSize: "14px", 
+    borderRadius: "6px", 
+    backgroundColor: "#6a1b9a", 
+    "&:hover": { backgroundColor: "#8e24aa" } 
+  }}
+  onClick={handlePaymaent}
+>
+  המשך לתשלום
+</Button>
         </Box>
       ) : (
         <Typography variant="body1" color="textSecondary">
@@ -240,14 +252,20 @@ const Cart: React.FC = () => {
         </Typography>
       )}
 
-      <Button
-        variant="outlined"
-        color="secondary"
-        sx={{ marginTop: '20px', alignSelf: 'flex-start' }}
-        onClick={handleGoBack}
-      >
-        חזרה לחנות
-      </Button>
+<Button
+  variant="contained"
+  sx={{
+    marginTop: "10px",
+    padding: "8px 24px",
+    fontSize: "14px",
+    borderRadius: "6px",
+    backgroundColor: "#6a1b9a",
+    "&:hover": { backgroundColor: "#8e24aa" }
+  }}
+  onClick={handleGoBack}
+>
+  חזרה לחנות
+</Button>
     </Box>
   );
 };

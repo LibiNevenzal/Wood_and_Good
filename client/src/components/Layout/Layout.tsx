@@ -8,10 +8,23 @@ import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import CartPreview from "../CartPreview/CartPreview";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import TextField from "@mui/material/TextField";
+
+import { useAdmin } from "../AdminContext/AdminContext";
 
 const Layout: React.FC = () => {
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [adminPassword, setAdminPassword] = useState("");
+    const [error, setError] = useState("");
+
+    const { isAdmin, loginAsAdmin, logoutAdmin } = useAdmin();
+
     const open = Boolean(anchorEl);
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,28 +57,47 @@ const Layout: React.FC = () => {
         }
     };
 
-    const handleLogout = (): void => {
-        localStorage.removeItem("currentUser");
-        navigate("/login");
+    const handleAdminLoginClick = () => {
+        setIsDialogOpen(true);
+    };
+
+    const handleAdminLogin = () => {
+        const success = loginAsAdmin(adminPassword);
+        if (success) {
+            setIsDialogOpen(false);
+            setAdminPassword("");
+            setError("");
+        } else {
+            setError("סיסמה שגויה");
+        }
     };
 
     return (
         <>
             <AppBar position="static" sx={{ backgroundColor: "#D2B48C" }}>
                 <Toolbar>
-                    {/* דף הבית */}
                     <Typography variant="h6" sx={{ flexGrow: 1 }}>
                         <Button color="inherit" component={Link} to="/home">
                             דף הבית
                         </Button>
                     </Typography>
 
-                    {/* קצת עלינו */}
+                    {/* כפתורים שזמינים רק למנהל */}
+                    {isAdmin && (
+                        <>
+                            <Button color="inherit" component={Link} to="/admin/edit-ready-signs">
+                                עריכת שלטים מוכנים
+                            </Button>
+                            <Button color="inherit" component={Link} to="/admin/edit-custom-signs">
+                                עריכת שלטים בהזמנה אישית
+                            </Button>
+                        </>
+                    )}
+
                     <Button color="inherit" onClick={handleScrollToAbout}>
                         קצת עלינו
                     </Button>
 
-                    {/* חנות - Dropdown Menu */}
                     <Button
                         color="inherit"
                         onClick={handleMenuOpen}
@@ -97,22 +129,45 @@ const Layout: React.FC = () => {
                         </MenuItem>
                     </Menu>
 
-                    {/* גלריה */}
                     <Button color="inherit" onClick={handleScrollToGallery}>
                         גלריה
                     </Button>
 
-                    {/* עגלת קניות */}
                     <CartPreview />
 
-                    {/* Logout */}
-                    <Button color="inherit" onClick={handleLogout}>
-                        Logout
-                    </Button>
+                    {isAdmin ? (
+                        <Button color="inherit" onClick={logoutAdmin}>
+                            התנתקות
+                        </Button>
+                    ) : (
+                        <Button color="inherit" onClick={handleAdminLoginClick}>
+                            כניסת מנהל
+                        </Button>
+                    )}
                 </Toolbar>
             </AppBar>
 
-            {/* תוכן מרכזי */}
+            {/* Dialog להזנת סיסמת מנהל */}
+            <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+                <DialogTitle>כניסת מנהל</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        label="סיסמה"
+                        type="password"
+                        fullWidth
+                        value={adminPassword}
+                        onChange={(e) => setAdminPassword(e.target.value)}
+                        error={!!error}
+                        helperText={error}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setIsDialogOpen(false)}>ביטול</Button>
+                    <Button onClick={handleAdminLogin}>כניסה</Button>
+                </DialogActions>
+            </Dialog>
+
             <Box sx={{ p: 2 }}>
                 <Outlet />
             </Box>

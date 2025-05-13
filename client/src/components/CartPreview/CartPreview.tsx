@@ -35,8 +35,9 @@ const CartPreview: React.FC = () => {
     const id = open ? "cart-popover" : undefined;
     
     const getTotalPrice = () => {
-        return cartItems.reduce((total, item) => total + item.price, 0);
+        return cartItems.reduce((total, item) => total + Number(item.price), 0);
     };
+    
     
     return (
         <>
@@ -87,12 +88,20 @@ const CartPreview: React.FC = () => {
                                 סה"כ: {getTotalPrice()} ש"ח
                             </Typography>
                             <Box sx={{ display: "flex", flexDirection: "column", mt: 2 }}>
-                                <Button variant="outlined" color="primary" onClick={() => navigate("/cart")}>
-                                    לעגלת הקניות
-                                </Button>
-                                <Button variant="contained" color="primary" sx={{ mt: 1 }} onClick={() => navigate("/payment")}>
-                                    לתשלום
-                                </Button>
+                            <Button 
+        variant="outlined" 
+        sx={{ borderColor: "#6a1b9a", color: "#6a1b9a" }} 
+        onClick={() => navigate("/cart")}
+    >
+        לעגלת הקניות
+    </Button>
+    <Button 
+        variant="contained" 
+        sx={{ backgroundColor: "#6a1b9a", color: "#fff", mt: 1 }} 
+        onClick={() => navigate("/payment")}
+    >
+        לתשלום
+    </Button>
                             </Box>
                         </>
                     ) : (

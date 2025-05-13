@@ -19,13 +19,14 @@ import {
   Checkbox,
 } from "@mui/material";
 import { config } from '../config';
+import { fontFamily } from "@mui/system";
 
 interface ErrorState {
   wood: boolean;
   size: boolean;
   font: boolean;
   finish: boolean;
-  engravingText: boolean; 
+  engravingText: boolean;
 }
 
 interface Option {
@@ -110,85 +111,87 @@ const CustomSignForm = () => {
     return 0; // Default case if no cart exists
   };
 
-const handleCart = () => {
-  // בדוק אם כל השדות שהגדרנו כחובה נבחרו, אך לא את האייקונים
-  if (!selectedWood || !selectedSize || !selectedFont || !selectedFinish || !engravingText.trim()) {
-    setError({
-      wood: !selectedWood,
-      size: !selectedSize,
-      font: !selectedFont,
-      finish: !selectedFinish,
-      engravingText: !engravingText.trim(),
-    });
-    return;
-  }
+  const handleCart = () => {
+    // בדוק אם כל השדות שהגדרנו כחובה נבחרו, אך לא את האייקונים
+    if (!selectedWood || !selectedSize || !selectedFont || !selectedFinish || !engravingText.trim()) {
+      setError({
+        wood: !selectedWood,
+        size: !selectedSize,
+        font: !selectedFont,
+        finish: !selectedFinish,
+        engravingText: !engravingText.trim(),
+      });
+      return;
+    }
 
-  const cartData = {
-    id: getIdToCart(),
-    wood: selectedWood,
-    size: selectedSize,
-    font: selectedFont,
-    icons: selectedIcon, // אייקונים יכולים להישאר ריקים
-    price: 0,
-    finish: selectedFinish,
-    engravingText: engravingText,
+    const cartData = {
+      id: getIdToCart(),
+      wood: selectedWood,
+      size: selectedSize,
+      font: selectedFont,
+      icons: selectedIcon, // אייקונים יכולים להישאר ריקים
+      price: 0,
+      finish: selectedFinish,
+      engravingText: engravingText,
+    };
+
+    const currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    currentCart.push(cartData);
+    localStorage.setItem('cart', JSON.stringify(currentCart));
+    navigate('/cart');
   };
 
-  const currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
-  currentCart.push(cartData);
-  localStorage.setItem('cart', JSON.stringify(currentCart));
-  navigate('/cart');
-};
+  const handleSelect = (category: "wood" | "size" | "font" | "finish", description?: string) => {
+    const newDescription = description || "אין מידע זמין";
 
-const handleSelect = (category: "wood" | "size" | "font" | "finish", description?: string) => {
-  const newDescription = description || "אין מידע זמין";
-
-  switch (category) {
-    case "wood":
-      setWoodDescription(newDescription);
-      break;
-    case "size":
-      setSizeDescription(newDescription);
-      break;
-    case "font":
-      setFontDescription(newDescription);
-      break;
-    case "finish":
-      setFinishDescription(newDescription);
-      break;
-    default:
-      console.warn("Unknown category:", category);
-  }
-};
+    switch (category) {
+      case "wood":
+        setWoodDescription(newDescription);
+        break;
+      case "size":
+        setSizeDescription(newDescription);
+        break;
+      case "font":
+        setFontDescription(newDescription);
+        break;
+      case "finish":
+        setFinishDescription(newDescription);
+        break;
+      default:
+        console.warn("Unknown category:", category);
+    }
+  };
 
 
   return (
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-        <Card sx={{ maxWidth: 600, width: "100%", p: 3 }}>
-          {loading ? (
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+    <Box sx={{
+      display: "flex", justifyContent: "center", mt: 5, backgroundColor: "#d2b48c2e"
+    }}>
+      < Card sx={{
+        maxWidth: "90%", width: "100%", p: 3, direction: "rtl"
+      }}>
+        {
+          loading ? (
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }} >
               <CircularProgress />
               <Typography sx={{ ml: 2 }}>טוען נתונים...</Typography>
-            </Box>
+            </Box >
           ) : (
             <Paper elevation={3} sx={{ p: 3 }}>
               <Typography variant="h5" align="center" gutterBottom>
-                :הזמנת שלט מותאם אישית
+                שלט בהתאמה אישית
               </Typography>
-    
+
               <Grid container spacing={3}>
                 {/* סוג עץ */}
                 <Grid item xs={12}>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    לחיצה על אופציה תציג מידע נוסף
-                  </Typography>
                   <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
                     <Button
                       variant="contained"
                       sx={{ backgroundColor: "#D2B48C", color: "white" }}
                       onClick={() => setDisplayWood(!displayWood)}
                     >
-                      :בחר סוג עץ
+                      סוג עץ:
                     </Button>
                   </Box>
                   {displayWood && (
@@ -200,7 +203,7 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                           setSelectedWood(e.target.value);
                           handleSelect("wood", selected?.description);
                         }}
-                        
+
                       >
                         {data.materialTypesResult.map((wood) => (
                           <FormControlLabel
@@ -215,27 +218,23 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                     </FormControl>
                   )}
                 </Grid>
-    
-{/* הצגת התיאור */}
-<Grid item xs={12}>
-                <Paper sx={{ p: 2, backgroundColor: "#f5f5f5" }}>
-                  <Typography variant="subtitle1">תיאור:</Typography>
-                  <Typography>{woodDescription}</Typography>
-                </Paper>
-              </Grid>
+
+                {/* הצגת התיאור */}
+                <Grid item xs={12}>
+                  <Paper sx={{ p: 2, backgroundColor: "#f5f5f5" }}>
+                    <Typography>{woodDescription}</Typography>
+                  </Paper>
+                </Grid>
 
                 {/* גודל */}
                 <Grid item xs={12}>
-                <Typography variant="subtitle1" color="textSecondary">
-                    לחיצה על אופציה תציג מידע נוסף
-                  </Typography>
                   <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
                     <Button
                       variant="contained"
                       sx={{ backgroundColor: "#D2B48C", color: "white" }}
                       onClick={() => setDisplaySize(!displaySize)}
                     >
-                      :בחר גודל
+                     גודל:
                     </Button>
                   </Box>
                   {displaySize && (
@@ -247,7 +246,7 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                           setSelectedSize(e.target.value);
                           handleSelect("size", selected?.description);
                         }}
-                        
+
                       >
                         {data.sizesResult.map((size) => (
                           <FormControlLabel
@@ -262,27 +261,23 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                     </FormControl>
                   )}
                 </Grid>
-    
-{/* הצגת התיאור */}
-<Grid item xs={12}>
-                <Paper sx={{ p: 2, backgroundColor: "#f5f5f5" }}>
-                  <Typography variant="subtitle1">תיאור:</Typography>
-                  <Typography>{sizeDescription}</Typography>
-                </Paper>
-              </Grid>
+
+                {/* הצגת התיאור */}
+                <Grid item xs={12}>
+                  <Paper sx={{ p: 2, backgroundColor: "#f5f5f5" }}>
+                    <Typography>{sizeDescription}</Typography>
+                  </Paper>
+                </Grid>
 
                 {/* פונט */}
                 <Grid item xs={12}>
-                <Typography variant="subtitle1" color="textSecondary">
-                    לחיצה על אופציה תציג מידע נוסף
-                  </Typography>
                   <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
                     <Button
                       variant="contained"
                       sx={{ backgroundColor: "#D2B48C", color: "white" }}
                       onClick={() => setDisplayFont(!displayFont)}
                     >
-                      :בחר סוג פונט
+                      פונט:
                     </Button>
                   </Box>
                   {displayFont && (
@@ -294,10 +289,11 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                           setSelectedFont(e.target.value);
                           handleSelect("font", selected?.description);
                         }}
-                        
+
                       >
                         {data.fontsResult.map((font) => (
                           <FormControlLabel
+                            //style={fontFamily={font.englishName}}
                             key={font.id}
                             value={font.name}
                             control={<Radio />}
@@ -309,27 +305,23 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                     </FormControl>
                   )}
                 </Grid>
-    
-{/* הצגת התיאור */}
-<Grid item xs={12}>
-                <Paper sx={{ p: 2, backgroundColor: "#f5f5f5" }}>
-                  <Typography variant="subtitle1">תיאור:</Typography>
-                  <Typography>{fontDescription}</Typography>
-                </Paper>
-              </Grid>
-    
+
+                {/* הצגת התיאור */}
+                <Grid item xs={12}>
+                  <Paper sx={{ p: 2, backgroundColor: "#f5f5f5" }}>
+                    <Typography>{fontDescription}</Typography>
+                  </Paper>
+                </Grid>
+
                 {/* פיניש */}
                 <Grid item xs={12}>
-                <Typography variant="subtitle1" color="textSecondary">
-                    לחיצה על אופציה תציג מידע נוסף
-                  </Typography>
                   <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
                     <Button
                       variant="contained"
                       sx={{ backgroundColor: "#D2B48C", color: "white" }}
                       onClick={() => setDisplayFinish(!displayFinish)}
                     >
-                      :בחר סוג גימור
+                      גימור:
                     </Button>
                   </Box>
                   {displayFinish && (
@@ -341,7 +333,7 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                           setSelectedFinish(e.target.value);
                           handleSelect("finish", selected?.description);
                         }}
-                        
+
                       >
                         {data.finishesResult.map((finish) => (
                           <FormControlLabel
@@ -356,15 +348,14 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                     </FormControl>
                   )}
                 </Grid>
-    
-{/* הצגת התיאור */}
-<Grid item xs={12}>
-                <Paper sx={{ p: 2, backgroundColor: "#f5f5f5" }}>
-                  <Typography variant="subtitle1">תיאור:</Typography>
-                  <Typography>{finishDescription}</Typography>
-                </Paper>
-              </Grid>
-    
+
+                {/* הצגת התיאור */}
+                <Grid item xs={12}>
+                  <Paper sx={{ p: 2, backgroundColor: "#f5f5f5" }}>
+                    <Typography>{finishDescription}</Typography>
+                  </Paper>
+                </Grid>
+
                 {/* איקונים */}
                 <Grid item xs={12}>
                   <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
@@ -373,7 +364,7 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                       sx={{ backgroundColor: "#D2B48C", color: "white" }}
                       onClick={() => setDisplayIcons(!displayIcons)}
                     >
-                      :בחר איקונים להוספה
+                    איקונים להוספה:
                     </Button>
                   </Box>
                   {displayIcons && (
@@ -391,11 +382,11 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                     </Grid>
                   )}
                 </Grid>
-    
+
                 {/* שדה טקסט לחריטה */}
                 <Grid item xs={12}>
                   <TextField
-                    label="?מה תרצה לחרוט על השלט"
+                    label="מה תרצה לחרוט על השלט?"
                     variant="outlined"
                     fullWidth
                     multiline
@@ -407,24 +398,24 @@ const handleSelect = (category: "wood" | "size" | "font" | "finish", description
                   />
                 </Grid>
               </Grid>
-    
+
               {/* כפתור שליחה */}
               <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleCart}
-                  sx={{ px: 5 }}
-                >
-                  שלח הזמנה
-                </Button>
+              <Button
+  variant="contained"
+  onClick={handleCart}
+  sx={{ backgroundColor: "#6a1b9a", color: "#fff", px: 5, "&:hover": { backgroundColor: "#4a0072" } }}
+>
+  שלח הזמנה
+</Button>
+
               </Box>
             </Paper>
           )}
-        </Card>
-      </Box>
-    );
-    
+      </Card >
+    </Box >
+  );
+
 };
 
 export default CustomSignForm;

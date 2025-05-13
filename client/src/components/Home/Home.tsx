@@ -1,7 +1,7 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import React from "react";
 import style from "./Home.module.css";
-import woodImage from "./wood.png";
+import woodImage from "./background.png";
 import exampleImage from "./example.png";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { Box, Typography, IconButton, Grid } from "@mui/material";
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
     return (
         <>
             {/* חלק אמצעי - תמונה וכיתוב */}
-            <div className={style.heroSection}>
+            <div className={style.heroSection} dir="rtl">
                 <img
                     src={woodImage}
                     alt="Wooden background"
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
             </div>
 
             {/* תוכן נוסף עם ID */}
-            <div id="about-section" className={style.aboutSection}>
+            <div id="about-section" className={style.aboutSection} dir="rtl">
                 <Typography variant="h6" gutterBottom>
                     הכרה על ידי הקהילה הבינלאומית
                 </Typography>
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
                 </Typography>
             </div>
   {/* גלריה */}
-  <div id="gallery-section" className={style.gallerySection}>
+  <div id="gallery-section" className={style.gallerySection} dir="rtl">
                 <Typography variant="h6" gutterBottom>
                     גלריה
                 </Typography>

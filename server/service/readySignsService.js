@@ -34,9 +34,9 @@ export class ReadySignsService {
         return result;
     }
 
-    async addContact(newItem) {
+    async addReadySign(newItem) {
         const values = Object.values(newItem);
-        const queryUser = addQuery("contacts", newItem);
+        const queryUser = addQuery("readySign", newItem);
         const result = await executeQuery(queryUser, values);
         return result;
     }

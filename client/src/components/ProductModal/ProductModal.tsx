@@ -46,7 +46,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, product }) =
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
-      <DialogContent>
+      <DialogContent sx={{ direction: "rtl", textAlign: "right" }}>
         {product ? (
           <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }}>
             {/* תמונה */}
@@ -59,14 +59,14 @@ const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, product }) =
             </Box>
 
             {/* פרטי מוצר */}
-            <Box flex="1" p={2}>
+            <Box flex="1" p={2} >
               <Typography variant="h3" gutterBottom>{product.name}</Typography>
               <Typography variant="h5" color="textSecondary" gutterBottom>מחיר: {product.price} ₪</Typography>
               <Typography variant="body1" gutterBottom>סוג עץ: {product.material_type_id}</Typography>
               <Typography variant="body1" gutterBottom>גודל: {product.size_id}</Typography>
               
               <TextField
-                label="?מה תרצה לחרוט על השלט"
+                label="מה תרצה לחרוט על השלט?"
                 variant="outlined"
                 fullWidth
                 margin="normal"
@@ -82,11 +82,11 @@ const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, product }) =
         )}
       </DialogContent>
 
-      <DialogActions style={{ justifyContent: 'space-between', padding: '16px' }}>
-        <Button onClick={onClose} style={{ backgroundColor: '#D2B48C', color: '#fff' }} variant="contained">
+      <DialogActions style={{ justifyContent: 'space-between', padding: '16px' ,direction: "rtl" }}>
+        <Button onClick={onClose} style={{ backgroundColor:  "#6a1b9a", color: '#fff' }} variant="contained">
           ביטול
         </Button>
-        <Button onClick={handleAddToCart} style={{ backgroundColor: '#D2B48C', color: '#fff' }} variant="contained">
+        <Button onClick={handleAddToCart} style={{ backgroundColor:  "#6a1b9a", color: '#fff' }} variant="contained">
           הוסף לעגלה
         </Button>
       </DialogActions>
