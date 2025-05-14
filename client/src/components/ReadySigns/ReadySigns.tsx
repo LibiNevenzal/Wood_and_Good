@@ -4,12 +4,12 @@ import { getRequest } from "../Tools/APIRequests";
 import ProductModal from '../ProductModal/ProductModal';
 
 interface Product {
-  id: string;
+  id: number;
   name: string;
   price: number;
-  material_type_id: string;
+  material_type: string;
   image_key: string;
-  size_id: string;
+  size: string;
 }
 
 const ReadySigns: FC = () => {

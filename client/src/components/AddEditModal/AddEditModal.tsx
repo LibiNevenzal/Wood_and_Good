@@ -10,12 +10,12 @@ import {
 import { postRequest, putRequest } from "../Tools/APIRequests";
 
 interface Product {
-  id?: string;
+  id?: number;
   name: string;
   price: number;
-  material_type_id: string;
+  material_type: string;
   image_key: string;
-  size_id: string;
+  size: string;
 }
 
 interface Props {
@@ -29,9 +29,9 @@ const AddEditModal: React.FC<Props> = ({ open, onClose, product, mode }) => {
   const [formData, setFormData] = useState<Product>({
     name: "",
     price: 0,
-    material_type_id: "",
+    material_type: "",
     image_key: "",
-    size_id: "",
+    size: "",
   });
 
   useEffect(() => {
@@ -41,9 +41,9 @@ const AddEditModal: React.FC<Props> = ({ open, onClose, product, mode }) => {
       setFormData({
         name: "",
         price: 0,
-        material_type_id: "",
+        material_type: "",
         image_key: "",
-        size_id: "",
+        size: "",
       });
     }
   }, [product, mode]);
@@ -56,9 +56,9 @@ const AddEditModal: React.FC<Props> = ({ open, onClose, product, mode }) => {
 
   const handleSave = async () => {
     if (mode === "edit" && product?.id) {
-      await putRequest("readySign", formData, product.id, (msg) => console.log(msg));
+      await putRequest("readySigns", formData, product.id, (msg) => console.log(msg));
     } else {
-      await postRequest("readySign", formData, (msg) => console.log(msg));
+      await postRequest("readySigns", formData, (msg) => console.log(msg));
     }
     onClose();
   };
@@ -87,10 +87,10 @@ const AddEditModal: React.FC<Props> = ({ open, onClose, product, mode }) => {
         />
         <TextField
           margin="dense"
-          name="material_type_id"
-          label="סוג עץ (ID)"
+          name="material_type"
+          label="סוג עץ"
           fullWidth
-          value={formData.material_type_id}
+          value={formData.material_type}
           onChange={handleChange}
         />
         <TextField
@@ -103,10 +103,10 @@ const AddEditModal: React.FC<Props> = ({ open, onClose, product, mode }) => {
         />
         <TextField
           margin="dense"
-          name="size_id"
-          label="גודל (ID)"
+          name="size"
+          label="גודל"
           fullWidth
-          value={formData.size_id}
+          value={formData.size}
           onChange={handleChange}
         />
       </DialogContent>

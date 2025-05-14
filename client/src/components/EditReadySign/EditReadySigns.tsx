@@ -13,12 +13,12 @@ import { getRequest, deleteRequest } from "../Tools/APIRequests";
 import AddEditModal from "../AddEditModal/AddEditModal"; // נניח שזו קומפוננטת מודל להוספה ועריכה
 
 interface Product {
-  id: string;
+  id: number;
   name: string;
   price: number;
-  material_type_id: string;
+  material_type: string;
   image_key: string;
-  size_id: string;
+  size: string;
 }
 
 const EditReadySigns: FC = () => {
@@ -46,7 +46,7 @@ const EditReadySigns: FC = () => {
     fetchData();
   }, []);
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     const confirmed = window.confirm("האם אתה בטוח שברצונך למחוק?");
     if (confirmed) {
       const success = await deleteRequest("readySign", id, setIsSucceed);

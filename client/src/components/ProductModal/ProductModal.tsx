@@ -32,8 +32,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, product }) =
       id: product.id,
       name: product.name,
       price: product.price,
-      wood: product.material_type_id,
-      size: product.size_id,
+      wood: product.material_type,
+      size: product.size,
       engravingText: engravingText,
       image: product.image_key
     };
@@ -62,8 +62,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ open, onClose, product }) =
             <Box flex="1" p={2} >
               <Typography variant="h3" gutterBottom>{product.name}</Typography>
               <Typography variant="h5" color="textSecondary" gutterBottom>מחיר: {product.price} ₪</Typography>
-              <Typography variant="body1" gutterBottom>סוג עץ: {product.material_type_id}</Typography>
-              <Typography variant="body1" gutterBottom>גודל: {product.size_id}</Typography>
+              <Typography variant="body1" gutterBottom>סוג עץ: {product.material_type}</Typography>
+              <Typography variant="body1" gutterBottom>גודל: {product.size}</Typography>
               
               <TextField
                 label="מה תרצה לחרוט על השלט?"
