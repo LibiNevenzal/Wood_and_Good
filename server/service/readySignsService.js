@@ -16,18 +16,30 @@ export class ReadySignsService {
         return result;
     }
 
-    async deleteReadySign(idKey, idValue) {
-        const donors = await donorsService.getDonors({ filter: `contact_id=${idValue}` });
-        for (const donor of donors.data) {
-            await donorsService.patchDonor({ contact_id: null }, donor.id);
-        }
-        const query = deleteQuery("contacts", `${idKey}`);
-        const result = await executeQuery(query, [idValue]);
+    // async deleteReadySign(idKey, idValue) {
+    //     const donors = await donorsService.getDonors({ filter: `contact_id=${idValue}` });
+    //     for (const donor of donors.data) {
+    //         await donorsService.patchDonor({ contact_id: null }, donor.id);
+    //     }
+    //     const query = deleteQuery("contacts", `${idKey}`);
+    //     const result = await executeQuery(query, [idValue]);
+    //     return result;
+    // }
+
+    async deleteReadySign(id) {
+        console.log("libiiii");
+        console.log(id);
+        const query = deleteQuery("ready_signs", "id");
+        const result = await executeQuery(query, [id]);
         return result;
     }
+    
 
-    async updateContact(updatedItem, id) {
-        const query = updateQuery("contacts", updatedItem, "id");
+
+
+
+    async updatereadySign(updatedItem, id) {
+        const query = updateQuery("ready_signs", updatedItem, "id");
         const values = Object.values(updatedItem);
         values.push(id);
         const result = await executeQuery(query, values);

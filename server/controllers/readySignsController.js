@@ -33,10 +33,10 @@ export class ReadySignsController {
         }
     }
 
-    async updateContact(req, res, next) {
+    async updateReadySign(req, res, next) {
         try {
-            const contactsService = new ContactsService();
-            const resultItems = await contactsService.updateContact(req.body, req.params.id);
+            const readySignService = new ReadySignsService();
+            const resultItems = await readySignService.updatereadySign(req.body, req.params.id);
             return res.json(resultItems);
         }
         catch (ex) {
@@ -49,8 +49,9 @@ export class ReadySignsController {
 
     async deleteReadySign(req, res, next) {
         try {
+            console.log("libi delete");
             const readySignService = new ReadySignsService();
-            await readySignService.deleteReadySign("id",req.params.id);
+            await readySignService.deleteReadySign( Number(req.params.id));
             return res.json({ data: req.params.id });
         }
         catch (ex) {
