@@ -47,10 +47,10 @@ export class ReadySignsController {
         }
     }
 
-    async deleteContact(req, res, next) {
+    async deleteReadySign(req, res, next) {
         try {
-            const contactsService = new ContactsService();
-            await contactsService.deleteContact("id",req.params.id);
+            const readySignService = new ReadySignsService();
+            await readySignService.deleteReadySign("id",req.params.id);
             return res.json({ data: req.params.id });
         }
         catch (ex) {
@@ -63,6 +63,7 @@ export class ReadySignsController {
 
 async addReadySign(req, res, next) {
     try {
+        console.log("libiiiiiiii");
         const readySignsService = new ReadySignsService();
         const result = await readySignsService.addReadySign(req.body);
         res.json({ insertId: result.insertId });

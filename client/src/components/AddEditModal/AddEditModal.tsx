@@ -56,9 +56,9 @@ const AddEditModal: React.FC<Props> = ({ open, onClose, product, mode }) => {
 
   const handleSave = async () => {
     if (mode === "edit" && product?.id) {
-      await putRequest("readySigns", formData, product.id, (msg) => console.log(msg));
+      await putRequest("readySign", formData, product.id, (msg) => console.log(msg));
     } else {
-      await postRequest("readySigns", formData, (msg) => console.log(msg));
+      await postRequest("readySign", formData, (msg) => console.log(msg));
     }
     onClose();
   };

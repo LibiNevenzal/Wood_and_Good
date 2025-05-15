@@ -16,7 +16,7 @@ export class ReadySignsService {
         return result;
     }
 
-    async deleteContact(idKey, idValue) {
+    async deleteReadySign(idKey, idValue) {
         const donors = await donorsService.getDonors({ filter: `contact_id=${idValue}` });
         for (const donor of donors.data) {
             await donorsService.patchDonor({ contact_id: null }, donor.id);
@@ -36,7 +36,7 @@ export class ReadySignsService {
 
     async addReadySign(newItem) {
         const values = Object.values(newItem);
-        const queryUser = addQuery("readySign", newItem);
+        const queryUser = addQuery("ready_signs", newItem);
         const result = await executeQuery(queryUser, values);
         return result;
     }
